@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Rock, Paper or Scissors</title>
+  <meta charset="UTF-8"/>
+</head>
+<body>
+  <script> 
+
+    //computer play selection
+  	const plays = ['rock', 'paper', 'scissors'];
+
+    function computerPlay() {
+
+    return plays[Math.floor(Math.random() * plays.length)];
+
+    };
+
+    let computerSelection;
+    let playerSelection;
+    let userInput;
+
+    function playRound() {
+
+    computerSelection = computerPlay();
+
+    //player play selection
+    userInput = prompt('Rock, Paper or Scissors?');
+    playerSelection = userInput.toLowerCase();
+
+    //game logic
+    if (playerSelection == computerSelection) {
+    	alert('IT\'S A TIE!');
+    }
+    else if ((playerSelection == 'rock' && computerSelection == 'paper') ||
+    		(playerSelection == 'paper' && computerSelection == 'scissors') ||
+    		(playerSelection == 'scissors' && computerSelection == 'rock')) {
+    	alert(`YOU LOSE!\n${computerSelection} beats ${playerSelection}`);		
+    		}
+    else if ((playerSelection == 'rock' && computerSelection == 'scissors') ||
+    		(playerSelection == 'paper' && computerSelection == 'rock') ||
+    		(playerSelection == 'scissors' && computerSelection == 'paper')) {
+    	alert(`YOU WIN!\n${playerSelection} beats ${computerSelection}`);		
+    		}
+    else {
+    	playRound()
+    };
+
+    playRound();   
+
+    };
+
+    playRound();
+     
+  </script>
+</body>
+</html>
