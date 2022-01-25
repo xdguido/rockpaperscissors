@@ -7,8 +7,8 @@
 <body>
   <script> 
 
-    //computer play selection
-  	const plays = ['rock', 'paper', 'scissors'];
+    //computer play selection.
+  	const plays = ['r', 'p', 's'];
 
     function computerPlay() {
 
@@ -19,38 +19,61 @@
     let computerSelection;
     let playerSelection;
     let userInput;
+    let computerScore = 0;
+    let playerScore = 0;
 
     function playRound() {
 
     computerSelection = computerPlay();
 
-    //player play selection
-    userInput = prompt('Rock, Paper or Scissors?');
-    playerSelection = userInput.toLowerCase();
+    //player play selection.
+    userInput = prompt('Rock (R), Paper (P) or Scissors (S)?');
+    playerSelection = userInput.toLowerCase().charAt(0);
 
-    //game logic
+    //game logic.
     if (playerSelection == computerSelection) {
-    	alert('IT\'S A TIE!');
+    	alert(`IT\'S A TIE!\nPC: ${computerScore} - YOU: ${playerScore}`);
     }
-    else if ((playerSelection == 'rock' && computerSelection == 'paper') ||
-    		(playerSelection == 'paper' && computerSelection == 'scissors') ||
-    		(playerSelection == 'scissors' && computerSelection == 'rock')) {
-    	alert(`YOU LOSE!\n${computerSelection} beats ${playerSelection}`);		
+    else if ((playerSelection == 'r' && computerSelection == 'p') ||
+    		(playerSelection == 'p' && computerSelection == 's') ||
+    		(playerSelection == 's' && computerSelection == 'r')) {
+        computerScore = ++computerScore;
+    	alert(`YOU LOSE!\nPC: ${computerScore} - YOU: ${playerScore}`);		
     		}
-    else if ((playerSelection == 'rock' && computerSelection == 'scissors') ||
-    		(playerSelection == 'paper' && computerSelection == 'rock') ||
-    		(playerSelection == 'scissors' && computerSelection == 'paper')) {
-    	alert(`YOU WIN!\n${playerSelection} beats ${computerSelection}`);		
+    else if ((playerSelection == 'r' && computerSelection == 's') ||
+    		(playerSelection == 'p' && computerSelection == 'r') ||
+    		(playerSelection == 's' && computerSelection == 'p')) {
+        playerScore = ++playerScore;
+    	alert(`YOU WIN!\nPC: ${computerScore} - YOU: ${playerScore}`);        		
     		}
     else {
     	playRound()
+    };   
+
+    };    
+
+    //best of 5 points.
+    function game() {
+        playRound();
+        if (computerScore == 3) {
+            alert(`You lose the match! PC: ${computerScore} - YOU: ${playerScore}\nPress Enter to play again.`);
+            computerScore = 0;
+            playerScore = 0;
+            game();
+        }
+        else if (playerScore == 3) {
+            alert(`You won the match! PC: ${computerScore} - YOU: ${playerScore}\nPress Enter to play again.`);
+            computerScore = 0;
+            playerScore = 0;
+            game();
+        }
+        else {
+            game();
+        } 
     };
 
-    playRound();   
-
-    };
-
-    playRound();
+    alert('Welcome to a best of 5 "Rock, Paper or Scissors" match!\nYou can select your play typing R, P or S.');
+    game();
      
   </script>
 </body>
