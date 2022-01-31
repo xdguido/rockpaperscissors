@@ -1,7 +1,11 @@
 @import url('https://fonts.googleapis.com/css2?family=Baloo+Bhaijaan+2:wght@500&display=swap');
 
 :root {
-  font-size: 18px;
+  
+  --step-0: clamp(1.00rem, 0.95rem + 0.24vw, 1.13rem);
+  --step-1: clamp(1.20rem, 1.12rem + 0.40vw, 1.41rem);
+
+  font-size: var(--step-0);
 
   --primary-bckgrnd-clr: hsl(0, 0%, 83%);
   --secondary-bckgrnd-clr: hsl(0, 0%, 91%);
@@ -12,7 +16,7 @@ body {
  margin: 0;
  display: flex;
  flex-direction: column;  
- font-size: 1rem;
+ font-size: var(--step-0);
  font-family: 'Baloo Bhaijaan 2', cursive;
  background-color: var(--primary-bckgrnd-clr);
  align-items: center;
