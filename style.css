@@ -80,6 +80,8 @@ button {
   padding-top: 1rem;
 }
 
+/*
+
 .modal {
   position: fixed;
   top: 0;
@@ -102,8 +104,10 @@ button {
   cursor: pointer;
 }
 
+*/
+
 .win-animation {
- animation: winAnimation 1s;
+ animation: winAnimation 1s ease-out;
 }
 
 @keyframes winAnimation {
