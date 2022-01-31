@@ -3,69 +3,76 @@
 <head>
   <title>Rock, Paper or Scissors</title>
   <meta charset="UTF-8"/>
-  <style type="text/css">
-      body {
-        display: flex;
-        flex-direction: column;
-        margin: 0;  
-        font-size: 25px;
-        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-        align-items: center;
-      }
-      div {
-        display: flex;
-        gap: 8px;
-      }
-      button {
-        height: 100px;
-        width: 100px;
-      }
-  </style>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="./style.css">
 </head>
 <body>
 
-  <div>
-    <div>
-        <div>Computer:</div>
+  <h1 class="header">Rock, Paper or Scissors</h1>
+
+  <div class="main-container">
+    
+  <div class="score-container">
+    <div class="pc__display">
+        <div>Computer</div>
+        <div id="pc-play"></div>
         <div id="pc-score"></div>
     </div>
-    <div>
-        <div>Player:</div>
+    <div class="user__display">
+        <div>Player</div>
+        <div id="user-play"></div>
         <div id="user-score"></div>
     </div>    
   </div>
 
   <div id="match-msg"></div>
 
-  <div style="padding: 10px">
-  <button style="font-size: 50px" id="r-btn">&#9994;</button>
-  <button style="font-size: 50px" id="p-btn">&#9995;</button>
-  <button style="font-size: 54px" id="s-btn">&#9996;</button>  
+  <div class="btn-container">
+  <button id="r-btn">&#9994;</button>
+  <button id="p-btn">&#9995;</button>
+  <button id="s-btn">&#9996;</button>  
   </div>
+
+  </div>
+
+  <!--
+  <div class="modal">
+      <div class="modal__inner">
+          <div class="modal__content"></div>
+          <div class="modal__btn"></div>
+      </div>
+  </div>
+  -->
 
   <script>
 
+    const pcDisplay = document.querySelector('.pc__display');
+    const userDisplay = document.querySelector('.user__display');
     const matchMsg = document.querySelector('#match-msg');
     const pcScore = document.querySelector('#pc-score');
     const userScore = document.querySelector('#user-score');
+    const pcPlay = document.querySelector('#pc-play');
+    const userPlay = document.querySelector('#user-play');
+
     const rBtn = document.querySelector('#r-btn');
     const pBtn = document.querySelector('#p-btn');
-    const sBtn = document.querySelector('#s-btn');    
-
-    rBtn.addEventListener('click', () => {
-        playRound('r')});
-    pBtn.addEventListener('click', () => {
-        playRound('p')});
-    sBtn.addEventListener('click', () => {
-        playRound('s')}); 
+    const sBtn = document.querySelector('#s-btn');
 
     const plays = ['r', 'p', 's'];
     let computerSelection;
     let playerSelection;
     let computerScore = 0;
-    let playerScore = 0;
+    let playerScore = 0;    
 
-       
+    rBtn.addEventListener('click', () => {
+        playerSelection = 'r';
+        playRound()});
+    pBtn.addEventListener('click', () => {
+        playerSelection = 'p';
+        playRound()});
+    sBtn.addEventListener('click', () => {
+        playerSelection = 's';
+        playRound()});        
 
     //computer play selection.
     function computerPlay() {
@@ -74,47 +81,62 @@
 
     };    
 
-    function playRound(playerSelection) {
+    function playRound() {
 
-    computerSelection = computerPlay();
+        computerSelection = computerPlay();        
 
     //game logic.
-    if (playerSelection == computerSelection) {    	
-        matchMsg.textContent = 'Tie';
-    }
-    else if ((playerSelection == 'r' && computerSelection == 'p') ||
+        if (playerSelection == computerSelection) {    	
+            matchMsg.textContent = 'Tie';
+            clearStyle();
+            void pcDisplay.offsetWidth;
+            void userDisplay.offsetWidth;
+            //this trigger reflow to reset css animation properly.
+            displayTie();
+
+            }
+        else if ((playerSelection == 'r' && computerSelection == 'p') ||
     		(playerSelection == 'p' && computerSelection == 's') ||
     		(playerSelection == 's' && computerSelection == 'r')) {
-        computerScore = ++computerScore;
-    	matchMsg.textContent = 'You lose';
-        score();
-        game();		
+            computerScore = ++computerScore;
+    	    matchMsg.textContent = 'You lose';
+            clearStyle();
+            void pcDisplay.offsetWidth;
+            displayLose();
+            score();
+            game();
+
     		}
-    else if ((playerSelection == 'r' && computerSelection == 's') ||
+        else if ((playerSelection == 'r' && computerSelection == 's') ||
     		(playerSelection == 'p' && computerSelection == 'r') ||
     		(playerSelection == 's' && computerSelection == 'p')) {
-        playerScore = ++playerScore;
-    	matchMsg.textContent = 'You won';
-        score();
-        game();        		
+            playerScore = ++playerScore;
+    	    matchMsg.textContent = 'You won';
+            clearStyle();
+            void userDisplay.offsetWidth;
+            displayWin();
+            score();
+            game();        		
     		}
     };    
 
     //best of 5 points.
     function game() {
         if (computerScore == 3) {
-            alert(`You lose the match! ${computerScore} - ${playerScore}\nPress Enter to play again.`);
-            computerScore = 0;
-            playerScore = 0;
-            score();
-            startMsg();            
-        }
-        else if (playerScore == 3) {
-            alert(`You won the match! ${computerScore} - ${playerScore}\nPress Enter to play again.`);
+            alert(`You lose the match!`);
             computerScore = 0;
             playerScore = 0;
             score();
             startMsg();
+            displayStart();            
+        }
+        else if (playerScore == 3) {
+            alert(`You won the match!`);
+            computerScore = 0;
+            playerScore = 0;
+            score();
+            startMsg();
+            displayStart();
         }         
     };
 
@@ -127,8 +149,70 @@
         matchMsg.textContent = 'Choose your play';
     };
 
+    function displayStart() {
+        userPlay.innerHTML = '&#10068;';
+        pcPlay.innerHTML = '&#10068;';
+    };
+
+    function displayWin() {
+        if (playerSelection == 'r') {
+            userPlay.innerHTML = '&#9994;';
+            pcPlay.innerHTML = '&#9996;';
+        }
+        else if (playerSelection == 'p') {
+            userPlay.innerHTML = '&#9995;';
+            pcPlay.innerHTML = '&#9994;';
+        }
+        else if (playerSelection == 's') {
+           userPlay.innerHTML = '&#9996;';
+           pcPlay.innerHTML = '&#9995;'; 
+        };
+        userDisplay.classList.add('win-animation');
+         
+    };
+
+    function displayLose() {
+        if (playerSelection == 'r') {
+            userPlay.innerHTML = '&#9994;';
+            pcPlay.innerHTML = '&#9995;';
+        }
+        else if (playerSelection == 'p') {
+            userPlay.innerHTML = '&#9995;';
+            pcPlay.innerHTML = '&#9996;';
+        }
+        else if (playerSelection == 's') {
+           userPlay.innerHTML = '&#9996;';
+           pcPlay.innerHTML = '&#9994;'; 
+        };
+        pcDisplay.classList.add('win-animation');
+        
+    };
+
+    function displayTie() {
+        if (playerSelection == 'r') {
+            userPlay.innerHTML = '&#9994;';
+            pcPlay.innerHTML = '&#9994;';
+        }
+        else if (playerSelection == 'p') {
+            userPlay.innerHTML = '&#9995;';
+            pcPlay.innerHTML = '&#9995;';
+        }
+        else if (playerSelection == 's') {
+           userPlay.innerHTML = '&#9996;';
+           pcPlay.innerHTML = '&#9996;'; 
+        };
+        pcDisplay.classList.add('win-animation');
+        userDisplay.classList.add('win-animation');        
+    };
+
+    function clearStyle() {
+        pcDisplay.classList.remove('win-animation');
+        userDisplay.classList.remove('win-animation');        
+    };
+
     score();
     startMsg();
+    displayStart();
 
      
   </script>

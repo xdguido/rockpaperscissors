@@ -1,0 +1,102 @@
+@import url('https://fonts.googleapis.com/css2?family=Baloo+Bhaijaan+2:wght@500&display=swap');
+
+:root {
+  font-size: 18px;
+
+  --primary-bckgrnd-clr: hsl(0, 0%, 83%);
+  --secondary-bckgrnd-clr: hsl(0, 0%, 91%);
+  --primary-clr: hsl(246, 80%, 54%);
+}
+
+body {
+ display: flex;
+ flex-direction: column;  
+ font-size: 1rem;
+ font-family: 'Baloo Bhaijaan 2', cursive;
+ background-color: var(--primary-bckgrnd-clr);
+ align-items: center;
+}
+
+button {
+ font-size: min(12vw, 3.5rem);
+ background-color: var(--primary-clr);
+ cursor: pointer;
+ border-radius: 8px;
+ height: 2.2em;
+ width: 2.2em;
+}
+
+.header {
+  margin-bottom: 5vh;
+}
+
+.main-container {
+  font-size: 1.8rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: var(--secondary-bckgrnd-clr);
+  box-shadow: 0px 0px 17px 8px rgba(0,0,0,0.29);
+  border-radius: 1rem;
+  padding: 1rem;
+}
+
+.score-container {
+  display: flex;
+  text-align: center;
+}
+
+.pc__display, .user__display {
+  width: 8rem;
+  padding-inline: min(3vw, 1.5rem);
+  margin-inline: min(1vw, 0.5rem);
+  border-radius: 1rem;
+}
+
+#pc-play, #user-play {
+  font-size: min(12vw, 3.5rem);
+}
+
+#match-msg {
+  font-size: 2rem;
+  padding-top: 2.2rem;
+}
+
+.btn-container {
+  padding-top: 1rem;
+}
+
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: hsl(0, 0%, 95%);
+}
+
+.modal__inner {
+  background-color: var(--secondary-bckgrnd-clr);
+  border-radius: 1rem;
+
+}
+
+.modal__btn {
+  cursor: pointer;
+}
+
+.win-animation {
+ animation: winAnimation 1s;
+}
+
+@keyframes winAnimation {
+  0% {
+    background-color: var(--primary-clr);
+  }
+  100% {
+    background-color: var(--secondary-bckgrnd-clr);
+  }
+}
