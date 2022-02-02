@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Baloo+Bhaijaan+2:wght@500&display=swap');
 
 :root {
-  
+  /* fluid font scale generated with utopia.fyi */
   --step-0: clamp(1.00rem, 0.95rem + 0.24vw, 1.13rem);
   --step-1: clamp(1.20rem, 1.12rem + 0.40vw, 1.41rem);
 
@@ -53,7 +53,7 @@ button {
   flex-direction: column;
   align-items: center;
   background-color: var(--secondary-bckgrnd-clr);
-  box-shadow: 0px 0px 17px 8px rgba(0,0,0,0.29);
+  box-shadow: 0px 5px 10px rgba(0,0,0,0.25);
   border-radius: 1rem;
   padding: 1rem;
   margin-bottom: 2rem;
