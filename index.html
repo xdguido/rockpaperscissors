@@ -13,16 +13,18 @@
   <div class="main-container">
     
   <div class="score-container">
+    
+    <div class="user__display">
+        <div>Player</div>
+        <div id="user-play"></div>
+        <div id="user-score"></div>
+    </div>
     <div class="pc__display">
         <div>Computer</div>
         <div id="pc-play"></div>
         <div id="pc-score"></div>
     </div>
-    <div class="user__display">
-        <div>Player</div>
-        <div id="user-play"></div>
-        <div id="user-score"></div>
-    </div>    
+        
   </div>
 
   <div id="match-msg"></div>
@@ -154,8 +156,8 @@
     };
 
     function displayStart() {
-        userPlay.innerHTML = '&#10068;';
-        pcPlay.innerHTML = '&#10068;';
+        userPlay.innerHTML = '&#129312;';
+        pcPlay.innerHTML = '&#129312;';
     };
 
     function displayWin() {
